@@ -1,4 +1,4 @@
-﻿namespace StokTakipApp.PresentationLayer.Froms.Tanımlar
+﻿namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 {
     partial class FrmKategori
     {
@@ -226,7 +226,9 @@
             this.gridView1.GroupPanelText = " ";
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsCustomization.AllowColumnMoving = false;
             this.gridView1.OptionsCustomization.AllowGroup = false;
+            this.gridView1.OptionsCustomization.AllowQuickHideColumns = false;
             this.gridView1.OptionsView.ShowFooter = true;
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 

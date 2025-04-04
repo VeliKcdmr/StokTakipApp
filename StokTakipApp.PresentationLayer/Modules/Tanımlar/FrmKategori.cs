@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace StokTakipApp.PresentationLayer.Froms.Tanımlar
+namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 {
     public partial class FrmKategori : DevExpress.XtraEditors.XtraForm
     {

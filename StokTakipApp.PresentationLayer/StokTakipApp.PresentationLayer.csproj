@@ -72,19 +72,28 @@
     <Compile Include="FrmDashboard.Designer.cs">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Tanımlar\FrmKategori.cs">
+    <Compile Include="Modules\Tanımlar\FrmKategori.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Tanımlar\FrmKategori.Designer.cs">
+    <Compile Include="Modules\Tanımlar\FrmKategori.Designer.cs">
       <DependentUpon>FrmKategori.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Tanımlar\FrmMarka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Tanımlar\FrmMarka.Designer.cs">
+      <DependentUpon>FrmMarka.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmDashboard.resx">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Tanımlar\FrmKategori.resx">
+    <EmbeddedResource Include="Modules\Tanımlar\FrmKategori.resx">
       <DependentUpon>FrmKategori.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Tanımlar\FrmMarka.resx">
+      <DependentUpon>FrmMarka.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

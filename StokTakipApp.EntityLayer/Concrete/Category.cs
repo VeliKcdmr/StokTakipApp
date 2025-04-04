@@ -1,16 +1,13 @@
-﻿namespace StokTakipApp.EntityLayer.Concrete
+﻿using System.Collections.Generic;
+
+namespace StokTakipApp.EntityLayer.Concrete
 {
     public class Category
     {
-        public int Id { get; set; } // Benzersiz kategori tanımlayıcısı
+        public int Id { get; set; } // Birincil anahtar
         public string Name { get; set; } // Kategori adı
-        public string Description { get; set; } // Kategori açıklaması
-        public bool IsActive { get; set; } // Kategorinin aktiflik durumu
-
-        // Varsayılan constructor
-        public Category()
-        {
-            IsActive = true; // Varsayılan olarak aktif
-        }
+        public string Description { get; set; } // Açıklama
+        public bool IsActive { get; set; } = true; // Aktiflik durumu (Tabloda en son sütun olarak)                                                   
+        public virtual ICollection<Brand> Brands { get; set; } // Category'in birçok Brand ile ilişkisi var
     }
 }
