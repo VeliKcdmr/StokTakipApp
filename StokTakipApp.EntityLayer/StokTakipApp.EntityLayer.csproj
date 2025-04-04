@@ -55,6 +55,7 @@
     <Compile Include="Concrete\Category.cs" />
     <Compile Include="Concrete\Model.cs" />
     <Compile Include="Concrete\Product.cs" />
+    <Compile Include="Concrete\Shelf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

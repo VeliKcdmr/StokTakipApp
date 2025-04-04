@@ -51,10 +51,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBrandDal.cs" />
     <Compile Include="Abstract\ICategoryDal.cs" />
     <Compile Include="Abstract\IGenericDal.cs" />
+    <Compile Include="Abstract\IModelDal.cs" />
+    <Compile Include="Abstract\IProductDal.cs" />
+    <Compile Include="Abstract\IShelfDal.cs" />
     <Compile Include="Context\AppDbContext.cs" />
+    <Compile Include="EntityFramework\EfBrandDal.cs" />
     <Compile Include="EntityFramework\EfCategoryDal.cs" />
+    <Compile Include="EntityFramework\EfModelDal.cs" />
+    <Compile Include="EntityFramework\EfProductDal.cs" />
+    <Compile Include="EntityFramework\EfShelfDal.cs" />
     <Compile Include="Migrations\202504032020540_InitialCreate.cs" />
     <Compile Include="Migrations\202504032020540_InitialCreate.Designer.cs">
       <DependentUpon>202504032020540_InitialCreate.cs</DependentUpon>
@@ -62,6 +70,10 @@
     <Compile Include="Migrations\202504041449094_InitalUpdate.cs" />
     <Compile Include="Migrations\202504041449094_InitalUpdate.Designer.cs">
       <DependentUpon>202504041449094_InitalUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202504041614316_InitalShelfAdd.cs" />
+    <Compile Include="Migrations\202504041614316_InitalShelfAdd.Designer.cs">
+      <DependentUpon>202504041614316_InitalShelfAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504041449094_InitalUpdate.resx">
       <DependentUpon>202504041449094_InitalUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504041614316_InitalShelfAdd.resx">
+      <DependentUpon>202504041614316_InitalShelfAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

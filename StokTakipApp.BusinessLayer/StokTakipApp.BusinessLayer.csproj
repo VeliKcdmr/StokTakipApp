@@ -52,9 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\IBrandService.cs" />
     <Compile Include="Abstract\ICategoryService.cs" />
     <Compile Include="Abstract\IGenericService.cs" />
+    <Compile Include="Abstract\IModelService.cs" />
+    <Compile Include="Abstract\IProductService.cs" />
+    <Compile Include="Abstract\IShelfService.cs" />
+    <Compile Include="Concrete\BrandManager.cs" />
     <Compile Include="Concrete\CategoryManager.cs" />
+    <Compile Include="Concrete\ModelManager.cs" />
+    <Compile Include="Concrete\ProductManager.cs" />
+    <Compile Include="Concrete\ShelfManager.cs" />
     <Compile Include="Helpers\ExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

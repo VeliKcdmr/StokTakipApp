@@ -13,6 +13,8 @@ namespace StokTakipApp.DataAccessLayer.Context
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Model> Models { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Shelf> Shelves { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -111,6 +113,20 @@ namespace StokTakipApp.DataAccessLayer.Context
                 .WithMany(m => m.Products)
                 .HasForeignKey(p => p.ModelId);
 
+            // Raf(Shelf) yapılandırması
+            modelBuilder.Entity<Shelf>()
+                .ToTable("Shelves") // Tablo adı
+                .HasKey(s => s.Id); // Birincil anahtar
+
+            modelBuilder.Entity<Shelf>()
+                .Property(s => s.ShelfName)
+                .IsRequired()
+                .HasMaxLength(50); // Raf adı karakter sınırı
+
+            modelBuilder.Entity<Product>()
+                .HasRequired(p => p.Shelf) // Ürün mutlaka bir raf ile ilişkili olmalı
+                .WithMany(s => s.Products) // Bir raf birçok ürüne sahip olabilir
+                .HasForeignKey(p => p.ShelfId); // Foreign Key tanımı
 
             base.OnModelCreating(modelBuilder);
         }

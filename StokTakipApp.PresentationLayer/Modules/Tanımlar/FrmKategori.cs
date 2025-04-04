@@ -55,7 +55,13 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             try
             {
                 gridControl1.DataSource = null; // İlk başta boş bir yapı
-                gridControl1.DataSource = _categoryManager.TGetAll();
+                gridControl1.DataSource = _categoryManager.TGetAll().Select(c => new
+                {
+                    c.Id,
+                    c.Name,
+                    c.Description,
+                    IsActive = c.IsActive ? "Aktif" : "Pasif" // Durum için string değer
+                }).ToList(); // Kategorileri listele);
                 ConfigureGridColumns(); // Sütunları yapılandır
             }
             catch (Exception ex)

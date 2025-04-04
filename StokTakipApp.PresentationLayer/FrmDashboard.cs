@@ -1,4 +1,4 @@
-﻿using StokTakipApp.PresentationLayer.Froms.Tanımlar;
+﻿using StokTakipApp.PresentationLayer.Modules.Tanımlar;
 using System.Windows.Forms;
 
 namespace StokTakipApp.PresentationLayer

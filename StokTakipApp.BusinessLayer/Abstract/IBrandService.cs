@@ -2,7 +2,7 @@
 
 namespace StokTakipApp.BusinessLayer.Abstract
 {
-    public interface ICategoryService : IGenericService<Category>
+    public interface IBrandService:IGenericService<Brand>
     {
     }
 }

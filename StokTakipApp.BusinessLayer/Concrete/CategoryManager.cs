@@ -34,11 +34,13 @@ namespace StokTakipApp.BusinessLayer.Concrete
 
         public void TInsert(Category entity)
         {
+            entity.Name = entity.Name?.Trim();
             _categoryDal.Insert(entity);
         }
 
         public void TUpdate(Category entity)
         {
+            entity.Name = entity.Name?.Trim();
             _categoryDal.Update(entity);
         }
     }

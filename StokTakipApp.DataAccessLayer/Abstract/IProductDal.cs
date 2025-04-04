@@ -2,7 +2,7 @@
 
 namespace StokTakipApp.DataAccessLayer.Abstract
 {
-    public interface ICategoryDal : IGenericDal<Category>
+    public interface IProductDal:IGenericDal<Product>
     {
     }
 }
