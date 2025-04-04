@@ -3,6 +3,8 @@ using StokTakipApp.DataAccessLayer.Abstract;
 using StokTakipApp.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace StokTakipApp.BusinessLayer.Concrete
 {
@@ -17,17 +19,17 @@ namespace StokTakipApp.BusinessLayer.Concrete
 
         public void TDelete(Category entity)
         {
-           _categoryDal.Delete(entity);
+            _categoryDal.Delete(entity);
         }
 
         public List<Category> TGetAll()
         {
-          return _categoryDal.GetAll();
+            return _categoryDal.GetAll();
         }
 
         public Category TGetById(int id)
         {
-           return _categoryDal.GetById(id);
+            return _categoryDal.GetById(id);
         }
 
         public void TInsert(Category entity)

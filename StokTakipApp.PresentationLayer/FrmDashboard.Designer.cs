@@ -93,8 +93,8 @@
             // 
             this.btnUrunI.Caption = "Ürün İşlemleri";
             this.btnUrunI.Id = 6;
-            this.btnUrunI.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.Image")));
-            this.btnUrunI.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.btnUrunI.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnUrunI.ImageOptions.Image")));
+            this.btnUrunI.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnUrunI.ImageOptions.LargeImage")));
             this.btnUrunI.ItemAppearance.Hovered.Options.UseTextOptions = true;
             this.btnUrunI.ItemAppearance.Hovered.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnUrunI.ItemAppearance.Normal.Options.UseTextOptions = true;
@@ -107,8 +107,8 @@
             // 
             this.btnStokD.Caption = "Stok Durumu";
             this.btnStokD.Id = 7;
-            this.btnStokD.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
-            this.btnStokD.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.LargeImage")));
+            this.btnStokD.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStokD.ImageOptions.Image")));
+            this.btnStokD.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnStokD.ImageOptions.LargeImage")));
             this.btnStokD.ItemAppearance.Hovered.Options.UseTextOptions = true;
             this.btnStokD.ItemAppearance.Hovered.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnStokD.ItemAppearance.Normal.Options.UseTextOptions = true;
@@ -121,8 +121,8 @@
             // 
             this.btnKategoriT.Caption = "Kategori Tanımları";
             this.btnKategoriT.Id = 8;
-            this.btnKategoriT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.Image")));
-            this.btnKategoriT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.btnKategoriT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnKategoriT.ImageOptions.Image")));
+            this.btnKategoriT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnKategoriT.ImageOptions.LargeImage")));
             this.btnKategoriT.ItemAppearance.Hovered.Options.UseTextOptions = true;
             this.btnKategoriT.ItemAppearance.Hovered.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnKategoriT.ItemAppearance.Normal.Options.UseTextOptions = true;
@@ -136,8 +136,8 @@
             // 
             this.btnMarkaT.Caption = "Marka Tanımları";
             this.btnMarkaT.Id = 9;
-            this.btnMarkaT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.Image")));
-            this.btnMarkaT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
+            this.btnMarkaT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnMarkaT.ImageOptions.Image")));
+            this.btnMarkaT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnMarkaT.ImageOptions.LargeImage")));
             this.btnMarkaT.ItemAppearance.Hovered.Options.UseTextOptions = true;
             this.btnMarkaT.ItemAppearance.Hovered.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnMarkaT.ItemAppearance.Normal.Options.UseTextOptions = true;
@@ -150,8 +150,8 @@
             // 
             this.btnModelT.Caption = "Model Tanımları";
             this.btnModelT.Id = 10;
-            this.btnModelT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.Image")));
-            this.btnModelT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem5.ImageOptions.LargeImage")));
+            this.btnModelT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnModelT.ImageOptions.Image")));
+            this.btnModelT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnModelT.ImageOptions.LargeImage")));
             this.btnModelT.ItemAppearance.Hovered.Options.UseTextOptions = true;
             this.btnModelT.ItemAppearance.Hovered.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnModelT.ItemAppearance.Normal.Options.UseTextOptions = true;
@@ -164,8 +164,8 @@
             // 
             this.btnRafT.Caption = "Raf Tanımları";
             this.btnRafT.Id = 11;
-            this.btnRafT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.Image")));
-            this.btnRafT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.LargeImage")));
+            this.btnRafT.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnRafT.ImageOptions.Image")));
+            this.btnRafT.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnRafT.ImageOptions.LargeImage")));
             this.btnRafT.ItemAppearance.Hovered.Options.UseTextOptions = true;
             this.btnRafT.ItemAppearance.Hovered.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnRafT.ItemAppearance.Normal.Options.UseTextOptions = true;
@@ -276,6 +276,7 @@
             this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.MinimumSize = new System.Drawing.Size(1128, 634);
             this.Name = "FrmDashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stok Takip v.1.0";
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();

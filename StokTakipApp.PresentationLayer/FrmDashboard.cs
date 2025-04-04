@@ -19,8 +19,7 @@ namespace StokTakipApp.PresentationLayer
                 frmKategori.Show();
             }
             else
-            {
-                MessageBox.Show("Kategori formu zaten açık."); // Kullanıcıyı bilgilendirme
+            {                
                 frmKategori.BringToFront();
             }
         }
