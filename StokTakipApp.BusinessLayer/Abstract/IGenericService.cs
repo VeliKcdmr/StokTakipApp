@@ -12,6 +12,6 @@ namespace StokTakipApp.BusinessLayer.Abstract
         void TUpdate(T entity);
         void TDelete(T entity);
         T TGetById(int id);
-        List<T> TGetAll();
+        List<T> TGetAll();       
     }
 }

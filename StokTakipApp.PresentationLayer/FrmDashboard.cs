@@ -1,10 +1,11 @@
-﻿using StokTakipApp.PresentationLayer.Modules.Tanımlar;
+﻿using StokTakipApp.BusinessLayer.Concrete;
+using StokTakipApp.PresentationLayer.Modules.Tanımlar;
 using System.Windows.Forms;
 
 namespace StokTakipApp.PresentationLayer
-{
+{ 
     public partial class FrmDashboard : DevExpress.XtraEditors.XtraForm
-    {
+    { 
         public FrmDashboard()
         {
             InitializeComponent();
@@ -21,6 +22,20 @@ namespace StokTakipApp.PresentationLayer
             else
             {                
                 frmKategori.BringToFront();
+            }
+        }
+        FrmMarka frmMarka;
+        private void btnMarkaT_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (frmMarka == null || frmMarka.IsDisposed)
+            {
+                frmMarka = new FrmMarka();
+                frmMarka.MdiParent = this;
+                frmMarka.Show();
+            }
+            else
+            {
+                frmMarka.BringToFront();
             }
         }
     }

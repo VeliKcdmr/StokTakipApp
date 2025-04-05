@@ -1,11 +1,9 @@
-﻿using StokTakipApp.BusinessLayer.Abstract;
-using StokTakipApp.BusinessLayer.Concrete;
+﻿using StokTakipApp.BusinessLayer.Concrete;
 using StokTakipApp.DataAccessLayer.Context;
 using StokTakipApp.DataAccessLayer.EntityFramework;
 using StokTakipApp.EntityLayer.Concrete;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
@@ -13,7 +11,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
     public partial class FrmKategori : DevExpress.XtraEditors.XtraForm
     {
         private readonly CategoryManager _categoryManager;
-        private int categoryId;
+        private int _categoryId;
 
         public FrmKategori()
         {
@@ -25,10 +23,11 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             txtAd.Text = string.Empty;
             txtAciklama.Text = string.Empty;
             tsDurum.IsOn = true;
+            _categoryId = 0; // Kategori ID'sini sıfırla
         }
         private void txtAd_EditValueChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtAd.Text))
+            if (string.IsNullOrWhiteSpace(txtAd.Text) || _categoryId == 0)
             {
                 btnKaydet.Enabled = true;
                 BtnGuncelle.Enabled = false;
@@ -42,15 +41,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             }
 
         }
-
-        private void ConfigureGridColumns()
-        {
-            gridView1.Columns["Name"].Caption = "Kategori Adı";
-            gridView1.Columns["Description"].Caption = "Açıklama";
-            gridView1.Columns["IsActive"].Caption = "Durum";
-            gridView1.Columns["Id"].Visible = false; // "Id" sütununu gizle            
-        }
-        private void CategoryList()
+        private void LoadCategories()
         {
             try
             {
@@ -62,7 +53,10 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                     c.Description,
                     IsActive = c.IsActive ? "Aktif" : "Pasif" // Durum için string değer
                 }).ToList(); // Kategorileri listele);
-                ConfigureGridColumns(); // Sütunları yapılandır
+                gridView1.Columns["Name"].Caption = "Kategori Adı";
+                gridView1.Columns["Description"].Caption = "Açıklama";
+                gridView1.Columns["IsActive"].Caption = "Durum";
+                gridView1.Columns["Id"].Visible = false; // "Id" sütununu gizle
             }
             catch (Exception ex)
             {
@@ -72,7 +66,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 
         private void FrmKategori_Load(object sender, EventArgs e)
         {
-            CategoryList();
+            LoadCategories();
             txtAd_EditValueChanged(null, null); // Başlangıçta butonları etkinleştir
         }
 
@@ -100,7 +94,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                 };
                 _categoryManager.TInsert(category);
                 MessageBox.Show("Kategori başarıyla kaydedildi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CategoryList();
+                LoadCategories();
                 ClearFields(); // Alanları temizle
             }
             catch (Exception ex)
@@ -121,7 +115,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                 }
                 // Aynı isim kontrolü, ID farklı olan kayıtlar için
                 var existingCategory = _categoryManager.TGetAll()
-                    .FirstOrDefault(c => c.Name.Equals(txtAd.Text.Trim(), StringComparison.OrdinalIgnoreCase) && c.Id != categoryId);
+                    .FirstOrDefault(c => c.Name.Equals(txtAd.Text.Trim(), StringComparison.OrdinalIgnoreCase) && c.Id != _categoryId);
 
 
                 if (existingCategory != null)
@@ -129,7 +123,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                     MessageBox.Show(txtAd.Text.Trim() + " kategori zaten mevcut!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                var category = _categoryManager.TGetById(categoryId);
+                var category = _categoryManager.TGetById(_categoryId);
 
                 category.Name = txtAd.Text;
                 category.Description = txtAciklama.Text;
@@ -138,14 +132,13 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                 _categoryManager.TUpdate(category);
 
                 MessageBox.Show("Kategori başarıyla güncellendi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CategoryList();
+                LoadCategories();
                 ClearFields(); // Alanları temizle
             }
             catch (Exception ex)
             {
                 ExceptionHandler.HandleException(ex);
             }
-
         }
 
         private void BtnSil_Click(object sender, EventArgs e)
@@ -156,12 +149,12 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 
                 if (result == DialogResult.Yes)
                 {
-                    var category = _categoryManager.TGetById(categoryId);
+                    var category = _categoryManager.TGetById(_categoryId);
                     category.IsActive = false; // Silme işlemi yerine durumu pasif yapıyoruz
                     _categoryManager.TUpdate(category); // Güncelleme işlemi yapıyoruz
 
                     MessageBox.Show("Kategori başarıyla silindi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CategoryList();
+                    LoadCategories();
                     ClearFields(); // Alanları temizle
                 }
             }
@@ -181,7 +174,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                     var selectedCategoryId = (int)gridView1.GetFocusedRowCellValue("Id");
                     var category = _categoryManager.TGetById(selectedCategoryId);
 
-                    categoryId = category.Id; // Seçilen kategorinin ID'sini alıyoruz
+                    _categoryId = category.Id; // Seçilen kategorinin ID'sini alıyoruz
                     txtAd.Text = category.Name;
                     txtAciklama.Text = category.Description;
                     tsDurum.IsOn = category.IsActive;

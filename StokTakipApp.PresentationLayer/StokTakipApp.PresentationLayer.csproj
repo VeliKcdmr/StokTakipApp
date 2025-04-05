@@ -84,6 +84,18 @@
     <Compile Include="Modules\Tanımlar\FrmMarka.Designer.cs">
       <DependentUpon>FrmMarka.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Tanımlar\FrmModel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Tanımlar\FrmModel.Designer.cs">
+      <DependentUpon>FrmModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Tanımlar\FrmRaf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Tanımlar\FrmRaf.Designer.cs">
+      <DependentUpon>FrmRaf.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmDashboard.resx">

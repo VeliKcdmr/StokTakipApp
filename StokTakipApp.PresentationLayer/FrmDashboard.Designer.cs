@@ -145,6 +145,7 @@
             this.btnMarkaT.ItemAppearance.Pressed.Options.UseTextOptions = true;
             this.btnMarkaT.ItemAppearance.Pressed.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnMarkaT.Name = "btnMarkaT";
+            this.btnMarkaT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnMarkaT_ItemClick);
             // 
             // btnModelT
             // 

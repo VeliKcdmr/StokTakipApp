@@ -1,13 +1,18 @@
 ﻿using StokTakipApp.BusinessLayer.Abstract;
 using StokTakipApp.DataAccessLayer.Abstract;
+using StokTakipApp.DataAccessLayer.Context;
 using StokTakipApp.EntityLayer.Concrete;
 using System.Collections.Generic;
+using System.Linq;
+using System.Data.Entity;
+using System.Runtime.Remoting.Contexts;
 
 namespace StokTakipApp.BusinessLayer.Concrete
 {
     public class BrandManager : IBrandService
     {
         private readonly IBrandDal _brandDal;
+        private readonly AppDbContext _context;
 
         public BrandManager(IBrandDal brandDal)
         {
@@ -31,11 +36,13 @@ namespace StokTakipApp.BusinessLayer.Concrete
 
         public void TInsert(Brand entity)
         {
+            entity.Name = entity.Name?.Trim();
             _brandDal.Insert(entity);
         }
 
         public void TUpdate(Brand entity)
         {
+            entity.Name = entity.Name?.Trim();
             _brandDal.Update(entity);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using StokTakipApp.BusinessLayer.Abstract;
 using StokTakipApp.DataAccessLayer.Abstract;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StokTakipApp.BusinessLayer.Concrete
 {

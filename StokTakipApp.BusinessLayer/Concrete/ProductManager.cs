@@ -2,6 +2,7 @@
 using StokTakipApp.DataAccessLayer.Abstract;
 using StokTakipApp.EntityLayer.Concrete;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StokTakipApp.BusinessLayer.Concrete
 {
@@ -22,7 +23,7 @@ namespace StokTakipApp.BusinessLayer.Concrete
         public List<Product> TGetAll()
         {
             return _productDal.GetAll();
-        }
+        }       
 
         public Product TGetById(int id)
         {
