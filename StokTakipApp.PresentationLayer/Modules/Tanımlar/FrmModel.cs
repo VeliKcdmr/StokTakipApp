@@ -17,5 +17,10 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         {
             InitializeComponent();
         }
+
+        private void FrmModel_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

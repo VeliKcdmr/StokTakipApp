@@ -107,6 +107,12 @@
     <EmbeddedResource Include="Modules\Tanımlar\FrmMarka.resx">
       <DependentUpon>FrmMarka.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Tanımlar\FrmModel.resx">
+      <DependentUpon>FrmModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Tanımlar\FrmRaf.resx">
+      <DependentUpon>FrmRaf.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

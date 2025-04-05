@@ -3,6 +3,7 @@ using StokTakipApp.DataAccessLayer.Context;
 using StokTakipApp.DataAccessLayer.EntityFramework;
 using StokTakipApp.EntityLayer.Concrete;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -27,17 +28,24 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         }
         private void txtAd_EditValueChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtAd.Text) || _categoryId == 0)
+            if (string.IsNullOrWhiteSpace(txtAd.Text) && _categoryId == 0)
             {
                 btnKaydet.Enabled = true;
                 BtnGuncelle.Enabled = false;
                 BtnSil.Enabled = false;
+
             }
             else
             {
-                btnKaydet.Enabled = false;
-                BtnGuncelle.Enabled = true;
-                BtnSil.Enabled = true;
+                txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+                txtAd.Properties.Appearance.BorderColor = Color.Black; // Varsayılan renk
+
+                if (txtAd.Text != null && _categoryId != 0)
+                {
+                    btnKaydet.Enabled = false;
+                    BtnGuncelle.Enabled = true;
+                    BtnSil.Enabled = true;
+                }
             }
 
         }
@@ -66,6 +74,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 
         private void FrmKategori_Load(object sender, EventArgs e)
         {
+            txtAd.Text = string.Empty;
             LoadCategories();
             txtAd_EditValueChanged(null, null); // Başlangıçta butonları etkinleştir
         }
@@ -77,6 +86,10 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                 if (string.IsNullOrWhiteSpace(txtAd.Text))
                 {
                     MessageBox.Show("Kategori adı boş bırakılamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    // Hata durumunda textbox'ı kırmızı yap
+                    txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+                    txtAd.Properties.Appearance.BorderColor = Color.Red;
+                    txtAd.Focus();
                     return;
                 }
 
@@ -101,7 +114,6 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             {
                 ExceptionHandler.HandleException(ex);
             }
-
         }
 
         private void BtnGuncelle_Click(object sender, EventArgs e)

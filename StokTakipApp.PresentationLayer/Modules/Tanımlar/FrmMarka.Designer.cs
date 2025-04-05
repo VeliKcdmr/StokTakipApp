@@ -180,7 +180,7 @@
             this.txtAd.Properties.ValidateOnEnterKey = true;
             this.txtAd.Size = new System.Drawing.Size(232, 24);
             this.txtAd.TabIndex = 1;
-            this.txtAd.EditValueChanged += new System.EventHandler(this.txtAd_EditValueChanged);
+            this.txtAd.EditValueChanged += new System.EventHandler(this.txtAd_EditValueChanged);           
             // 
             // labelControl3
             // 

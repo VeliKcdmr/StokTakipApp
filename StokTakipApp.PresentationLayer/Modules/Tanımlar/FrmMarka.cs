@@ -119,13 +119,14 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                     MessageBox.Show("Marka adı boş bırakılamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
                     txtAd.Properties.Appearance.BorderColor = Color.Red;
+                    txtAd.Focus();
                     return;
                 }
                 else if (cmbKategori.EditValue == null)
                 {
                     MessageBox.Show("Lütfen bir kategori seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cmbKategori.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-                    cmbKategori.Properties.Appearance.BorderColor = Color.Red;
+                    cmbKategori.Properties.Appearance.BorderColor = Color.Red;                    
                     return;
                 }
 
@@ -253,6 +254,6 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         {
             cmbKategori.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             cmbKategori.Properties.Appearance.BorderColor = Color.Black; // Varsayılan renk
-        }
+        }      
     }
 }
