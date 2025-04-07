@@ -124,6 +124,10 @@ namespace StokTakipApp.DataAccessLayer.Context
                 .IsRequired()
                 .HasMaxLength(50); // Raf adı karakter sınırı
 
+            modelBuilder.Entity<Shelf>()
+               .Property(c => c.IsActive)
+               .IsRequired();
+
             modelBuilder.Entity<Product>()
                 .HasRequired(p => p.Shelf) // Ürün mutlaka bir raf ile ilişkili olmalı
                 .WithMany(s => s.Products) // Bir raf birçok ürüne sahip olabilir

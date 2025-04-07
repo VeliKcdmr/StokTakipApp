@@ -164,6 +164,7 @@
             this.txtAd.Properties.Appearance.Options.UseFont = true;
             this.txtAd.Size = new System.Drawing.Size(216, 24);
             this.txtAd.TabIndex = 1;
+            this.txtAd.EditValueChanged += new System.EventHandler(this.txtAd_EditValueChanged);
             // 
             // labelControl3
             // 
