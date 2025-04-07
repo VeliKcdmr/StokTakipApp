@@ -47,6 +47,8 @@ namespace StokTakipApp.PresentationLayer.Helpers
             control.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
             control.Properties.Appearance.BorderColor = Color.Black;
             return true;
+
+
         }
     }
 }

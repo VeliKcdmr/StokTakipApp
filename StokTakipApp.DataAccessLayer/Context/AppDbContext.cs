@@ -5,7 +5,7 @@ namespace StokTakipApp.DataAccessLayer.Context
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext() : base("AppDbContext") // Bağlantı dizesinin adını burada veriyoruz
+        public AppDbContext() : base("StokTakipCon") // Bağlantı dizesinin adını burada veriyoruz
         {
         }
 

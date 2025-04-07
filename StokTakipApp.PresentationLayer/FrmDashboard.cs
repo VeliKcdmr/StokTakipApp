@@ -1,5 +1,9 @@
-﻿using StokTakipApp.PresentationLayer.Modules.Products;
+﻿using DevExpress.XtraBars.Alerter;
+using StokTakipApp.DataAccessLayer;
+using StokTakipApp.PresentationLayer.Modules;
+using StokTakipApp.PresentationLayer.Modules.Products;
 using StokTakipApp.PresentationLayer.Modules.Tanımlar;
+using System.Windows.Forms;
 
 namespace StokTakipApp.PresentationLayer
 {
@@ -8,11 +12,10 @@ namespace StokTakipApp.PresentationLayer
         public FrmDashboard()
         {
             InitializeComponent();
-        }      
-               
+        }
+      
         private void FrmDashboard_Load(object sender, System.EventArgs e)
-        {
-
+        {            
         }
         FrmKategori frmKategori;
         private void btnKategoriT_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -96,6 +99,20 @@ namespace StokTakipApp.PresentationLayer
             else
             {
                 frmStoklar.BringToFront();
+            }
+        }
+        FrmAyarlar frmAyarlar;
+        private void btnSistemAyar_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (frmAyarlar == null || frmAyarlar.IsDisposed)
+            {
+                frmAyarlar = new FrmAyarlar();
+                frmAyarlar.MdiParent = this;
+                frmAyarlar.Show();
+            }
+            else
+            {
+                frmAyarlar.BringToFront();
             }
         }
     }

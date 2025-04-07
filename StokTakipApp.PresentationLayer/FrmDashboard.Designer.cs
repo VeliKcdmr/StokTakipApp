@@ -41,6 +41,7 @@
             this.btnBildirim = new DevExpress.XtraBars.BarButtonItem();
             this.popupControlContainer1 = new DevExpress.XtraBars.PopupControlContainer(this.components);
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSistemAyar = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -54,6 +55,7 @@
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage7 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPage8 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
@@ -82,9 +84,10 @@
             this.btnModelT,
             this.btnRafT,
             this.btnBildirim,
-            this.barButtonItem2});
+            this.barButtonItem2,
+            this.btnSistemAyar});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 18;
+            this.ribbonControl1.MaxItemId = 19;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.OptionsMenuMinWidth = 329;
             this.ribbonControl1.PageHeaderItemLinks.Add(this.btnBildirim);
@@ -219,6 +222,23 @@
             this.barButtonItem2.Id = 17;
             this.barButtonItem2.Name = "barButtonItem2";
             // 
+            // btnSistemAyar
+            // 
+            this.btnSistemAyar.Caption = "Sitem Ayarları";
+            this.btnSistemAyar.Id = 18;
+            this.btnSistemAyar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnSistemAyar.ImageOptions.Image")));
+            this.btnSistemAyar.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnSistemAyar.ImageOptions.LargeImage")));
+            this.btnSistemAyar.ItemAppearance.Disabled.Options.UseTextOptions = true;
+            this.btnSistemAyar.ItemAppearance.Disabled.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.btnSistemAyar.ItemAppearance.Hovered.Options.UseTextOptions = true;
+            this.btnSistemAyar.ItemAppearance.Hovered.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.btnSistemAyar.ItemAppearance.Normal.Options.UseTextOptions = true;
+            this.btnSistemAyar.ItemAppearance.Normal.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.btnSistemAyar.ItemAppearance.Pressed.Options.UseTextOptions = true;
+            this.btnSistemAyar.ItemAppearance.Pressed.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.btnSistemAyar.Name = "btnSistemAyar";
+            this.btnSistemAyar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSistemAyar_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -289,8 +309,15 @@
             // 
             // ribbonPage8
             // 
+            this.ribbonPage8.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup7});
             this.ribbonPage8.Name = "ribbonPage8";
             this.ribbonPage8.Text = "Ayarlar";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.btnSistemAyar);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
             // 
             // xtraTabbedMdiManager1
             // 
@@ -306,12 +333,12 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1126, 602);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
             this.Controls.Add(this.popupControlContainer1);
             this.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.MinimumSize = new System.Drawing.Size(1128, 634);
             this.Name = "FrmDashboard";
@@ -353,5 +380,7 @@
         private DevExpress.XtraBars.BarButtonItem btnBildirim;
         private DevExpress.XtraBars.PopupControlContainer popupControlContainer1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem btnSistemAyar;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
     }
 }

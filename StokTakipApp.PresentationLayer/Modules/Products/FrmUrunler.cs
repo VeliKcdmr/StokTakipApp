@@ -1,5 +1,6 @@
 ﻿
 using StokTakipApp.BusinessLayer.Concrete;
+using StokTakipApp.DataAccessLayer;
 using StokTakipApp.DataAccessLayer.Context;
 using StokTakipApp.DataAccessLayer.EntityFramework;
 using System;
@@ -26,6 +27,10 @@ namespace StokTakipApp.PresentationLayer.Modules.Products
         {
             InitializeComponent();
         }
+        public void LoadProduct()
+        {
+
+        }
         private void LoadProducts()
         {
             try
@@ -33,19 +38,20 @@ namespace StokTakipApp.PresentationLayer.Modules.Products
                 var categories = _categoryManager.TGetAll().ToList();
                 var brands = _brandManager.TGetAll().ToList();
                 var models = _modelManager.TGetAll().ToList();
+                var shelves = _shelfManager.TGetAll().ToList();
                 gridControl1.DataSource = null; // İlk başta boş bir yapı
                 gridControl1.DataSource = _productManager.TGetAll().Select(p => new
                 {
                     p.Id,
                     p.Name, // Ürün adı
                     p.Barcode, // Barkod
-                    p.StockQuantity, // Stok miktarı
-                    p.Price, // Ürün fiyatı
+                    shelves.FirstOrDefault(s => s.Id == p.ShelfId).ShelfName, // Raf adı
                     Category = categories.FirstOrDefault(c => c.Id == p.Model.Brand.CategoryId).Name,
-                    Brand = brands.FirstOrDefault(b=>b.Id == p.Model.BrandId).Name,
-                    ModelName = models.FirstOrDefault(m=>m.Id == p.Model.Id).Name,
-                    ModelYear = models.FirstOrDefault(y=>y.Id==p.Model.Year), // Model yılı
-                    ShelfName = p.Shelf.ShelfName, // Raf adı
+                    Brand = brands.FirstOrDefault(b => b.Id == p.Model.BrandId).Name,
+                    ModelName = models.FirstOrDefault(m => m.Id == p.Model.Id).Name,
+                    ModelYear = models.FirstOrDefault(y => y.Id == p.Model.Year), // Model yılı
+                    p.StockQuantity, // Stok miktarı
+                    p.Price, // Ürün fiyatı                   
                     IsActive = p.IsActive ? "Aktif" : "Pasif" // Durum için string değer
                 }).ToList(); // Verileri listele
 
