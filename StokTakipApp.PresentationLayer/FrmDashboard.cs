@@ -1,4 +1,5 @@
-﻿using StokTakipApp.PresentationLayer.Modules.Tanımlar;
+﻿using StokTakipApp.PresentationLayer.Modules.Products;
+using StokTakipApp.PresentationLayer.Modules.Tanımlar;
 
 namespace StokTakipApp.PresentationLayer
 {
@@ -8,7 +9,11 @@ namespace StokTakipApp.PresentationLayer
         {
             InitializeComponent();
         }      
+               
+        private void FrmDashboard_Load(object sender, System.EventArgs e)
+        {
 
+        }
         FrmKategori frmKategori;
         private void btnKategoriT_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -64,11 +69,34 @@ namespace StokTakipApp.PresentationLayer
             {
                 frmRaf.BringToFront();
             }
-        }
-
-        private void FrmDashboard_Load(object sender, System.EventArgs e)
+        }      
+        FrmUrunler frmUrunler;
+        private void btnUrunI_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
+            if (frmUrunler == null || frmUrunler.IsDisposed)
+            {
+                frmUrunler = new FrmUrunler();
+                frmUrunler.MdiParent = this;
+                frmUrunler.Show();
+            }
+            else
+            {
+                frmUrunler.BringToFront();
+            }
+        }
+        FrmStoklar frmStoklar;
+        private void btnStokD_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (frmStoklar == null || frmStoklar.IsDisposed)
+            {
+                frmStoklar = new FrmStoklar();
+                frmStoklar.MdiParent = this;
+                frmStoklar.Show();
+            }
+            else
+            {
+                frmStoklar.BringToFront();
+            }
         }
     }
 }

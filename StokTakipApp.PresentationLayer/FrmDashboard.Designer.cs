@@ -116,6 +116,7 @@
             this.btnUrunI.ItemAppearance.Pressed.Options.UseTextOptions = true;
             this.btnUrunI.ItemAppearance.Pressed.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnUrunI.Name = "btnUrunI";
+            this.btnUrunI.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUrunI_ItemClick);
             // 
             // btnStokD
             // 
@@ -130,6 +131,7 @@
             this.btnStokD.ItemAppearance.Pressed.Options.UseTextOptions = true;
             this.btnStokD.ItemAppearance.Pressed.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnStokD.Name = "btnStokD";
+            this.btnStokD.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStokD_ItemClick);
             // 
             // btnKategoriT
             // 

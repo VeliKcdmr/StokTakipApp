@@ -73,6 +73,18 @@
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="Modules\Products\FrmStoklar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Products\FrmStoklar.Designer.cs">
+      <DependentUpon>FrmStoklar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Products\FrmUrunler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modules\Products\FrmUrunler.Designer.cs">
+      <DependentUpon>FrmUrunler.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Tanımlar\FrmKategori.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +113,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmDashboard.resx">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Products\FrmUrunler.resx">
+      <DependentUpon>FrmUrunler.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Tanımlar\FrmKategori.resx">
       <DependentUpon>FrmKategori.cs</DependentUpon>
