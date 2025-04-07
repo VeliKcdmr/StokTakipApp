@@ -155,10 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dbquery\dbQ.txt" />
-    <None Include="Resources\icons8_ok_48px.png" />
-    <None Include="Resources\icons8_info_48px.png" />
-    <None Include="Resources\icons8_error_48px.png" />
-    <None Include="Resources\icons8_cancel_48px.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
