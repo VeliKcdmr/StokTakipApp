@@ -70,7 +70,7 @@
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(335, 440);
-            this.panelControl1.TabIndex = 1;
+            this.panelControl1.TabIndex = 0;
             // 
             // groupControl2
             // 
@@ -83,7 +83,7 @@
             this.groupControl2.Location = new System.Drawing.Point(2, 144);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(331, 294);
-            this.groupControl2.TabIndex = 1;
+            this.groupControl2.TabIndex = 0;
             // 
             // BtnSil
             // 
@@ -93,7 +93,7 @@
             this.BtnSil.Location = new System.Drawing.Point(209, 37);
             this.BtnSil.Name = "BtnSil";
             this.BtnSil.Size = new System.Drawing.Size(75, 33);
-            this.BtnSil.TabIndex = 6;
+            this.BtnSil.TabIndex = 7;
             this.BtnSil.Text = "Sil";
             this.BtnSil.Click += new System.EventHandler(this.BtnSil_Click);
             // 
@@ -105,7 +105,7 @@
             this.BtnGuncelle.Location = new System.Drawing.Point(108, 37);
             this.BtnGuncelle.Name = "BtnGuncelle";
             this.BtnGuncelle.Size = new System.Drawing.Size(95, 33);
-            this.BtnGuncelle.TabIndex = 5;
+            this.BtnGuncelle.TabIndex = 6;
             this.BtnGuncelle.Text = "Güncelle";
             this.BtnGuncelle.Click += new System.EventHandler(this.BtnGuncelle_Click);
             // 
@@ -118,7 +118,7 @@
             this.btnKaydet.Location = new System.Drawing.Point(10, 37);
             this.btnKaydet.Name = "btnKaydet";
             this.btnKaydet.Size = new System.Drawing.Size(92, 33);
-            this.btnKaydet.TabIndex = 4;
+            this.btnKaydet.TabIndex = 5;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
             // 
@@ -147,7 +147,7 @@
             this.txtAciklama.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtAciklama.Properties.Appearance.Options.UseFont = true;
             this.txtAciklama.Size = new System.Drawing.Size(232, 24);
-            this.txtAciklama.TabIndex = 5;
+            this.txtAciklama.TabIndex = 3;
             // 
             // labelControl4
             // 
@@ -169,7 +169,7 @@
             this.tsDurum.Properties.OffText = "Pasif";
             this.tsDurum.Properties.OnText = "Aktif";
             this.tsDurum.Size = new System.Drawing.Size(111, 23);
-            this.tsDurum.TabIndex = 3;
+            this.tsDurum.TabIndex = 4;
             // 
             // txtAd
             // 
@@ -180,7 +180,7 @@
             this.txtAd.Properties.ValidateOnEnterKey = true;
             this.txtAd.Size = new System.Drawing.Size(232, 24);
             this.txtAd.TabIndex = 1;
-            this.txtAd.EditValueChanged += new System.EventHandler(this.txtAd_EditValueChanged);           
+            this.txtAd.EditValueChanged += new System.EventHandler(this.txtAd_EditValueChanged);
             // 
             // labelControl3
             // 
@@ -235,7 +235,7 @@
             this.panelControl2.Location = new System.Drawing.Point(335, 0);
             this.panelControl2.Name = "panelControl2";
             this.panelControl2.Size = new System.Drawing.Size(682, 440);
-            this.panelControl2.TabIndex = 2;
+            this.panelControl2.TabIndex = 0;
             // 
             // gridControl1
             // 
@@ -272,7 +272,9 @@
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.Name = "FrmMarka";
-            this.Text = "MARKA İŞLEMLERİ";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Marka Tanımları";
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.FrmMarka_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);

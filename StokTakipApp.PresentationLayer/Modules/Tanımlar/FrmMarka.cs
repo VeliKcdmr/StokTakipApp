@@ -4,6 +4,7 @@ using StokTakipApp.BusinessLayer.Concrete;
 using StokTakipApp.DataAccessLayer.Context;
 using StokTakipApp.DataAccessLayer.EntityFramework;
 using StokTakipApp.EntityLayer.Concrete;
+using StokTakipApp.PresentationLayer.Helpers;
 using System;
 using System.Data.Entity;
 using System.Drawing;
@@ -24,22 +25,29 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 
         private void LoadBrands()
         {
-            var categories = _categoryManager.TGetAll().ToList();
-            var brands = _brandManager.TGetAll()
-                .Select(b => new
-                {
-                    b.Id,
-                    b.Name,
-                    b.Description,
-                    CategoryName = categories.FirstOrDefault(c => c.Id == b.CategoryId).Name, // Kategori adını al                    
-                    IsActive = b.IsActive ? "Aktif" : "Pasif",
-                }).ToList();
-            gridControl1.DataSource = brands;
-            gridView1.Columns["Name"].Caption = "Marka Adı";
-            gridView1.Columns["Description"].Caption = "Açıklama";
-            gridView1.Columns["CategoryName"].Caption = "Kategori Adı"; // Kategori adını göster
-            gridView1.Columns["IsActive"].Caption = "Durum";
-            gridView1.Columns["Id"].Visible = false; // "Id" sütununu gizle           
+            try
+            {
+                var categories = _categoryManager.TGetAll().ToList();
+                var brands = _brandManager.TGetAll()
+                    .Select(b => new
+                    {
+                        b.Id,
+                        b.Name,
+                        CategoryName = categories.FirstOrDefault(c => c.Id == b.CategoryId).Name, // Kategori adını al 
+                        b.Description,
+                        IsActive = b.IsActive ? "Aktif" : "Pasif"
+                    }).ToList();
+                gridControl1.DataSource = brands;
+                gridView1.Columns["Name"].Caption = "Marka Adı";
+                gridView1.Columns["CategoryName"].Caption = "Kategorisi"; // Kategori adını göster
+                gridView1.Columns["Description"].Caption = "Açıklama";
+                gridView1.Columns["IsActive"].Caption = "Durum";
+                gridView1.Columns["Id"].Visible = false; // "Id" sütununu gizle   
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error); // Kendi ExceptionHandler sınıfınızı çağırıyoruz
+            }
         }
         private void ClearFields()
         {
@@ -74,7 +82,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Kategoriler yüklenirken bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error); // Kendi ExceptionHandler sınıfınızı çağırıyoruz
             }
         }
 
@@ -92,15 +100,18 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                 txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
                 txtAd.Properties.Appearance.BorderColor = Color.Black; // Varsayılan renk
 
-                if (txtAd.Text != null && _brandId != 0)
+                if (string.IsNullOrWhiteSpace(txtAd.Text) || _brandId != 0)
                 {
                     btnKaydet.Enabled = false;
                     BtnGuncelle.Enabled = true;
                     BtnSil.Enabled = true;
                 }
             }
-
-
+        }
+        private void cmbKategori_EditValueChanged(object sender, EventArgs e)
+        {
+            cmbKategori.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+            cmbKategori.Properties.Appearance.BorderColor = Color.Black; // Varsayılan renk
         }
 
         private void FrmMarka_Load(object sender, EventArgs e)
@@ -114,21 +125,8 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtAd.Text))
-                {
-                    MessageBox.Show("Marka adı boş bırakılamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-                    txtAd.Properties.Appearance.BorderColor = Color.Red;
-                    txtAd.Focus();
-                    return;
-                }
-                else if (cmbKategori.EditValue == null)
-                {
-                    MessageBox.Show("Lütfen bir kategori seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cmbKategori.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-                    cmbKategori.Properties.Appearance.BorderColor = Color.Red;                    
-                    return;
-                }
+                if (!ValidationHelper.ValidateControl(txtAd, "Model adı boş bırakılamaz!")) return;
+                if (!ValidationHelper.ValidateControl(cmbKategori, "Lütfen bir marka seçiniz!")) return;
 
                 // Aynı isim kontrolü
 
@@ -137,7 +135,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 
                 if (existingBrand != null)
                 {
-                    MessageBox.Show(txtAd.Text + " Marka zaten mevcut!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(txtAd.Text + " Markası zaten mevcut!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 var brand = new Brand
@@ -156,7 +154,8 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
         }
 
@@ -164,6 +163,7 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         {
             try
             {
+                if (!ValidationHelper.ValidateControl(txtAd, "Model adı boş bırakılamaz!")) return;
                 // Aynı isim kontrolü, ID farklı olan kayıtlar için
                 var existingBrand = _brandManager.TGetAll()
                     .FirstOrDefault(c => c.Name.Equals(txtAd.Text.Trim(), StringComparison.OrdinalIgnoreCase) && c.Id != _brandId);
@@ -189,7 +189,8 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
         }
 
@@ -197,28 +198,43 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         {
             try
             {
+                if (!ValidationHelper.ValidateControl(txtAd, "Model adı boş bırakılamaz!")) return;
+                // Silme işlemi için marka seçimini kontrol et
                 if (_brandId == 0)
                 {
                     MessageBox.Show("Lütfen silmek istediğiniz markayı seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                var result = MessageBox.Show(txtAd.Text + " Markayı silmek istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                // Kullanıcıdan silme işlemi onayı al
+                var result = MessageBox.Show($"'{txtAd.Text}' markasını silmek istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
+                    // Mevcut marka bilgilerini al ve pasif hale getir
                     var brand = _brandManager.TGetById(_brandId);
-                    brand.IsActive = false; // Silme işlemi yerine durumu pasif yapıyoruz
-                    _brandManager.TUpdate(brand); // Güncelleme işlemi yapıyoruz
+                    if (brand != null)
+                    {
+                        brand.IsActive = false; // Marka pasif hale getiriliyor
+                        _brandManager.TUpdate(brand); // Güncelleme işlemi
 
-                    MessageBox.Show("Marka başarıyla silindi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadCategories();
-                    LoadBrands();
-                    ClearFields(); // Alanları temizle
+                        MessageBox.Show("Marka başarıyla silindi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Listeyi yenile ve alanları temizle
+                        LoadCategories();
+                        LoadBrands();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Marka bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
         }
 
@@ -245,15 +261,10 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
-
         }
 
-        private void cmbKategori_EditValueChanged(object sender, EventArgs e)
-        {
-            cmbKategori.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-            cmbKategori.Properties.Appearance.BorderColor = Color.Black; // Varsayılan renk
-        }      
     }
 }

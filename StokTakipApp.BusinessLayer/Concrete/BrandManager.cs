@@ -11,8 +11,7 @@ namespace StokTakipApp.BusinessLayer.Concrete
 {
     public class BrandManager : IBrandService
     {
-        private readonly IBrandDal _brandDal;
-        private readonly AppDbContext _context;
+        private readonly IBrandDal _brandDal;       
 
         public BrandManager(IBrandDal brandDal)
         {

@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Concrete\Brand.cs" />
     <Compile Include="Concrete\Category.cs" />
+    <Compile Include="Concrete\ErrorLog.cs" />
     <Compile Include="Concrete\Model.cs" />
     <Compile Include="Concrete\Product.cs" />
     <Compile Include="Concrete\Shelf.cs" />

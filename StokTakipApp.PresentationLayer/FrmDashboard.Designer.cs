@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmDashboard));
+            this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.btnUrunI = new DevExpress.XtraBars.BarButtonItem();
             this.btnStokD = new DevExpress.XtraBars.BarButtonItem();
@@ -37,6 +38,9 @@
             this.btnMarkaT = new DevExpress.XtraBars.BarButtonItem();
             this.btnModelT = new DevExpress.XtraBars.BarButtonItem();
             this.btnRafT = new DevExpress.XtraBars.BarButtonItem();
+            this.btnBildirim = new DevExpress.XtraBars.BarButtonItem();
+            this.popupControlContainer1 = new DevExpress.XtraBars.PopupControlContainer(this.components);
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -50,12 +54,19 @@
             this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage7 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPage8 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // ribbonStatusBar1
+            // 
+            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 575);
+            this.ribbonStatusBar1.Name = "ribbonStatusBar1";
+            this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
+            this.ribbonStatusBar1.Size = new System.Drawing.Size(1126, 27);
             // 
             // ribbonControl1
             // 
@@ -69,11 +80,14 @@
             this.btnKategoriT,
             this.btnMarkaT,
             this.btnModelT,
-            this.btnRafT});
+            this.btnRafT,
+            this.btnBildirim,
+            this.barButtonItem2});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 12;
+            this.ribbonControl1.MaxItemId = 18;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.OptionsMenuMinWidth = 329;
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.btnBildirim);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
             this.ribbonPage3,
@@ -160,6 +174,7 @@
             this.btnModelT.ItemAppearance.Pressed.Options.UseTextOptions = true;
             this.btnModelT.ItemAppearance.Pressed.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnModelT.Name = "btnModelT";
+            this.btnModelT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnModelT_ItemClick);
             // 
             // btnRafT
             // 
@@ -174,6 +189,33 @@
             this.btnRafT.ItemAppearance.Pressed.Options.UseTextOptions = true;
             this.btnRafT.ItemAppearance.Pressed.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
             this.btnRafT.Name = "btnRafT";
+            this.btnRafT.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRafT_ItemClick);
+            // 
+            // btnBildirim
+            // 
+            this.btnBildirim.ActAsDropDown = true;
+            this.btnBildirim.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.btnBildirim.Caption = "Bildirimler";
+            this.btnBildirim.DropDownControl = this.popupControlContainer1;
+            this.btnBildirim.Id = 16;
+            this.btnBildirim.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("btnBildirim.ImageOptions.SvgImage")));
+            this.btnBildirim.Name = "btnBildirim";
+            // 
+            // popupControlContainer1
+            // 
+            this.popupControlContainer1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.popupControlContainer1.Location = new System.Drawing.Point(0, 0);
+            this.popupControlContainer1.Name = "popupControlContainer1";
+            this.popupControlContainer1.Ribbon = this.ribbonControl1;
+            this.popupControlContainer1.Size = new System.Drawing.Size(250, 130);
+            this.popupControlContainer1.TabIndex = 3;
+            this.popupControlContainer1.Visible = false;
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "barButtonItem2";
+            this.barButtonItem2.Id = 17;
+            this.barButtonItem2.Name = "barButtonItem2";
             // 
             // ribbonPage1
             // 
@@ -248,13 +290,6 @@
             this.ribbonPage8.Name = "ribbonPage8";
             this.ribbonPage8.Text = "Ayarlar";
             // 
-            // ribbonStatusBar1
-            // 
-            this.ribbonStatusBar1.Location = new System.Drawing.Point(0, 575);
-            this.ribbonStatusBar1.Name = "ribbonStatusBar1";
-            this.ribbonStatusBar1.Ribbon = this.ribbonControl1;
-            this.ribbonStatusBar1.Size = new System.Drawing.Size(1126, 27);
-            // 
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
@@ -272,6 +307,7 @@
             this.ClientSize = new System.Drawing.Size(1126, 602);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
+            this.Controls.Add(this.popupControlContainer1);
             this.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.IsMdiContainer = true;
             this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
@@ -279,7 +315,9 @@
             this.Name = "FrmDashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stok Takip v.1.0";
+            this.Load += new System.EventHandler(this.FrmDashboard_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupControlContainer1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -287,29 +325,31 @@
         }
 
         #endregion
-
-        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar1;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage5;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage6;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage7;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage8;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.BarButtonItem btnUrunI;
         private DevExpress.XtraBars.BarButtonItem btnStokD;
         private DevExpress.XtraBars.BarButtonItem btnKategoriT;
         private DevExpress.XtraBars.BarButtonItem btnMarkaT;
         private DevExpress.XtraBars.BarButtonItem btnModelT;
         private DevExpress.XtraBars.BarButtonItem btnRafT;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage3;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage4;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage5;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage6;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage7;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage8;
+        private DevExpress.XtraBars.BarButtonItem btnBildirim;
+        private DevExpress.XtraBars.PopupControlContainer popupControlContainer1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
     }
 }

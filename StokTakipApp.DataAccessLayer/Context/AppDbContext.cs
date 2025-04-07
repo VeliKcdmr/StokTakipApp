@@ -14,6 +14,8 @@ namespace StokTakipApp.DataAccessLayer.Context
         public DbSet<Model> Models { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Shelf> Shelves { get; set; }
+        public DbSet<ErrorLog> ErrorLogs { get; set; } // ErrorLog Tablosu
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -71,8 +73,7 @@ namespace StokTakipApp.DataAccessLayer.Context
                 .HasMaxLength(500);
 
             modelBuilder.Entity<Model>()
-                .Property(m => m.Year)
-                .IsRequired();
+                .Property(m => m.Year);                
 
             modelBuilder.Entity<Model>()
                 .Property(m => m.IsActive)
@@ -127,6 +128,36 @@ namespace StokTakipApp.DataAccessLayer.Context
                 .HasRequired(p => p.Shelf) // Ürün mutlaka bir raf ile ilişkili olmalı
                 .WithMany(s => s.Products) // Bir raf birçok ürüne sahip olabilir
                 .HasForeignKey(p => p.ShelfId); // Foreign Key tanımı
+
+            // ErrorLog yapılandırması
+            modelBuilder.Entity<ErrorLog>() 
+               .ToTable("ErrorLogs")
+               .HasKey(e => e.Id);
+
+            modelBuilder.Entity<ErrorLog>()
+                .Property(e => e.LogDate)
+                .IsRequired();
+
+            modelBuilder.Entity<ErrorLog>()
+                .Property(e => e.LogLevel)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            modelBuilder.Entity<ErrorLog>()
+                .Property(e => e.Message)
+                .IsRequired();
+
+            modelBuilder.Entity<ErrorLog>()
+                .Property(e => e.Source)
+                .HasMaxLength(255);
+
+            modelBuilder.Entity<ErrorLog>()
+                .Property(e => e.TargetSite)
+                .HasMaxLength(255);
+
+            modelBuilder.Entity<ErrorLog>()
+                .Property(e => e.StackTrace);
+
 
             base.OnModelCreating(modelBuilder);
         }

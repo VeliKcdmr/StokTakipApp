@@ -2,6 +2,7 @@
 using StokTakipApp.DataAccessLayer.Context;
 using StokTakipApp.DataAccessLayer.EntityFramework;
 using StokTakipApp.EntityLayer.Concrete;
+using StokTakipApp.PresentationLayer.Helpers;
 using System;
 using System.Drawing;
 using System.Linq;
@@ -10,44 +11,12 @@ using System.Windows.Forms;
 namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
 {
     public partial class FrmKategori : DevExpress.XtraEditors.XtraForm
-    {
-        private readonly CategoryManager _categoryManager;
+    {       
+        private readonly CategoryManager _categoryManager = new CategoryManager(new EfCategoryDal(new AppDbContext()));
         private int _categoryId;
-
         public FrmKategori()
         {
             InitializeComponent();
-            _categoryManager = new CategoryManager(new EfCategoryDal(new AppDbContext()));
-        }
-        private void ClearFields()
-        {
-            txtAd.Text = string.Empty;
-            txtAciklama.Text = string.Empty;
-            tsDurum.IsOn = true;
-            _categoryId = 0; // Kategori ID'sini sıfırla
-        }
-        private void txtAd_EditValueChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtAd.Text) && _categoryId == 0)
-            {
-                btnKaydet.Enabled = true;
-                BtnGuncelle.Enabled = false;
-                BtnSil.Enabled = false;
-
-            }
-            else
-            {
-                txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
-                txtAd.Properties.Appearance.BorderColor = Color.Black; // Varsayılan renk
-
-                if (txtAd.Text != null && _categoryId != 0)
-                {
-                    btnKaydet.Enabled = false;
-                    BtnGuncelle.Enabled = true;
-                    BtnSil.Enabled = true;
-                }
-            }
-
         }
         private void LoadCategories()
         {
@@ -68,51 +37,84 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex); // Kendi ExceptionHandler sınıfınızı çağırıyoruz
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
         }
+        private void ClearFields()
+        {
+            txtAd.Text = string.Empty;            
+            tsDurum.IsOn = true;
+            txtAciklama.Text = string.Empty;
+            _categoryId = 0; // ID'yi sıfırla
+            btnKaydet.Enabled = true;
+            BtnGuncelle.Enabled = false;
+            BtnSil.Enabled = false;
+        }
 
+        private void txtAd_EditValueChanged(object sender, EventArgs e)
+        {
+            // Eğer txtAd boşsa ve yeni kategori ekleme modundaysa (_categoryId == 0)
+            if (string.IsNullOrWhiteSpace(txtAd.Text) && _categoryId == 0)
+            {
+                btnKaydet.Enabled = true;
+                BtnGuncelle.Enabled = false;
+                BtnSil.Enabled = false;
+            }
+            else
+            {
+                // Varsayılan stil ve renk ayarları
+                txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Default;
+                txtAd.Properties.Appearance.BorderColor = Color.Black;
+
+                // Eğer txtAd boşsa veya mevcut bir kategori düzenleniyorsa (_categoryId != 0)
+                if (string.IsNullOrWhiteSpace(txtAd.Text) || _categoryId != 0)
+                {
+                    btnKaydet.Enabled = false;
+                    BtnGuncelle.Enabled = true;
+                    BtnSil.Enabled = true;
+                }
+            }
+        }
         private void FrmKategori_Load(object sender, EventArgs e)
         {
-            txtAd.Text = string.Empty;
-            LoadCategories();
-            txtAd_EditValueChanged(null, null); // Başlangıçta butonları etkinleştir
+            LoadCategories();            
+            txtAd_EditValueChanged(null, null); // Başlangıçta butonları pasif yap
         }
 
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtAd.Text))
-                {
-                    MessageBox.Show("Kategori adı boş bırakılamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    // Hata durumunda textbox'ı kırmızı yap
-                    txtAd.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-                    txtAd.Properties.Appearance.BorderColor = Color.Red;
-                    txtAd.Focus();
-                    return;
-                }
-
-                var existingCategory = _categoryManager.TGetAll().FirstOrDefault(c => c.Name == txtAd.Text.Trim());
+                if (!ValidationHelper.ValidateControl(txtAd, "Kategori adı boş bırakılamaz!")) return;
+                // Aynı isimde kategori olup olmadığını kontrol et
+                var existingCategory = _categoryManager.TGetAll()
+                    .FirstOrDefault(c => c.Name.Equals(txtAd.Text.Trim(), StringComparison.OrdinalIgnoreCase));
                 if (existingCategory != null)
                 {
-                    MessageBox.Show(txtAd.Text + " kategori zaten mevcut!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"{txtAd.Text.Trim()} kategorisi zaten mevcut!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+                // Yeni kategori oluştur ve bilgileri ekle
                 var category = new Category
                 {
                     Name = txtAd.Text.Trim(),
-                    Description = txtAciklama.Text,
+                    Description = txtAciklama.Text.Trim(),
                     IsActive = tsDurum.IsOn
                 };
                 _categoryManager.TInsert(category);
+
                 MessageBox.Show("Kategori başarıyla kaydedildi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Listeyi yenile ve form alanlarını temizle
                 LoadCategories();
                 ClearFields(); // Alanları temizle
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                // Hata yönetimi
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
+
             }
         }
 
@@ -120,36 +122,44 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(txtAd.Text))
-                {
-                    MessageBox.Show("Kategori adı boş bırakılamaz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                if (!ValidationHelper.ValidateControl(txtAd, "Kategori adı boş bırakılamaz!")) return;
                 // Aynı isim kontrolü, ID farklı olan kayıtlar için
                 var existingCategory = _categoryManager.TGetAll()
                     .FirstOrDefault(c => c.Name.Equals(txtAd.Text.Trim(), StringComparison.OrdinalIgnoreCase) && c.Id != _categoryId);
 
-
                 if (existingCategory != null)
                 {
-                    MessageBox.Show(txtAd.Text.Trim() + " kategori zaten mevcut!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"{txtAd.Text.Trim()} kategorisi zaten mevcut!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                // Güncellenecek kategori bilgilerini al
                 var category = _categoryManager.TGetById(_categoryId);
+                if (category != null)
+                {
+                    category.Name = txtAd.Text.Trim();
+                    category.Description = txtAciklama.Text.Trim();
+                    category.IsActive = tsDurum.IsOn;
 
-                category.Name = txtAd.Text;
-                category.Description = txtAciklama.Text;
-                category.IsActive = tsDurum.IsOn;
+                    // Kategori bilgilerini güncelle
+                    _categoryManager.TUpdate(category);
 
-                _categoryManager.TUpdate(category);
+                    MessageBox.Show("Kategori başarıyla güncellendi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                MessageBox.Show("Kategori başarıyla güncellendi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadCategories();
-                ClearFields(); // Alanları temizle
+                    // Verileri yeniden yükle ve alanları temizle
+                    LoadCategories();
+                    ClearFields();
+                }
+                else
+                {
+                    MessageBox.Show("Güncellenecek kategori bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                // Hata yönetimi
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
         }
 
@@ -157,22 +167,43 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
         {
             try
             {
-                var result = MessageBox.Show(txtAd.Text + " kategoriyi silmek istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (!ValidationHelper.ValidateControl(txtAd, "Kategori adı boş bırakılamaz!")) return;
+                // Silme işlemi için kategori seçimini kontrol et
+                if (_categoryId == 0)
+                {
+                    MessageBox.Show("Lütfen silmek istediğiniz kategoriyi seçiniz!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Kullanıcıdan silme işlemi onayı al
+                var result = MessageBox.Show($"'{txtAd.Text}' kategorisini silmek istediğinize emin misiniz?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Yes)
                 {
+                    // Mevcut kategori bilgilerini al ve pasif hale getir
                     var category = _categoryManager.TGetById(_categoryId);
-                    category.IsActive = false; // Silme işlemi yerine durumu pasif yapıyoruz
-                    _categoryManager.TUpdate(category); // Güncelleme işlemi yapıyoruz
+                    if (category != null)
+                    {
+                        category.IsActive = false; // Kategori pasif hale getiriliyor
+                        _categoryManager.TUpdate(category); // Güncelleme işlemi
 
-                    MessageBox.Show("Kategori başarıyla silindi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadCategories();
-                    ClearFields(); // Alanları temizle
+                        MessageBox.Show("Kategori başarıyla silindi!", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Listeyi yenile ve alanları temizle
+                        LoadCategories();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Kategori bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                // Hata yönetimi
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
         }
 
@@ -186,21 +217,33 @@ namespace StokTakipApp.PresentationLayer.Modules.Tanımlar
                     var selectedCategoryId = (int)gridView1.GetFocusedRowCellValue("Id");
                     var category = _categoryManager.TGetById(selectedCategoryId);
 
-                    _categoryId = category.Id; // Seçilen kategorinin ID'sini alıyoruz
-                    txtAd.Text = category.Name;
-                    txtAciklama.Text = category.Description;
-                    tsDurum.IsOn = category.IsActive;
+                    if (category != null)
+                    {
+                        // Seçilen kategorinin bilgilerini form alanlarına aktar
+                        _categoryId = category.Id; // Seçilen kategorinin ID'sini alıyoruz
+                        txtAd.Text = category.Name;
+                        txtAciklama.Text = category.Description;
+                        tsDurum.IsOn = category.IsActive;
+                    }
+                    else
+                    {
+                        // Eğer kategori bulunamazsa hata mesajı
+                        MessageBox.Show("Seçilen kategori bulunamadı!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
+                    // Eğer hiçbir satır seçilmemişse bilgilendirme mesajı
                     MessageBox.Show("Lütfen bir satır seçiniz.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                ExceptionHandler.HandleException(ex);
+                // Hata yönetimi
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExceptionHandler.HandleException(ex, ExceptionHandler.LogLevel.Error);
             }
         }
-
+        
     }
 }

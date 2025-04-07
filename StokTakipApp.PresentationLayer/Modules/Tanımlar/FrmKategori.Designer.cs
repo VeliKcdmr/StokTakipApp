@@ -66,7 +66,7 @@
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(335, 539);
+            this.panelControl1.Size = new System.Drawing.Size(335, 411);
             this.panelControl1.TabIndex = 0;
             // 
             // groupControl2
@@ -79,7 +79,7 @@
             this.groupControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl2.Location = new System.Drawing.Point(2, 114);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(331, 423);
+            this.groupControl2.Size = new System.Drawing.Size(331, 295);
             this.groupControl2.TabIndex = 1;
             // 
             // BtnSil
@@ -99,7 +99,7 @@
             this.BtnGuncelle.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.BtnGuncelle.Appearance.Options.UseFont = true;
             this.BtnGuncelle.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("BtnGuncelle.ImageOptions.Image")));
-            this.BtnGuncelle.Location = new System.Drawing.Point(108, 37);
+            this.BtnGuncelle.Location = new System.Drawing.Point(107, 37);
             this.BtnGuncelle.Name = "BtnGuncelle";
             this.BtnGuncelle.Size = new System.Drawing.Size(95, 33);
             this.BtnGuncelle.TabIndex = 5;
@@ -114,7 +114,7 @@
             this.btnKaydet.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnKaydet.ImageOptions.Image")));
             this.btnKaydet.Location = new System.Drawing.Point(10, 37);
             this.btnKaydet.Name = "btnKaydet";
-            this.btnKaydet.Size = new System.Drawing.Size(92, 33);
+            this.btnKaydet.Size = new System.Drawing.Size(91, 33);
             this.btnKaydet.TabIndex = 4;
             this.btnKaydet.Text = "Kaydet";
             this.btnKaydet.Click += new System.EventHandler(this.btnKaydet_Click);
@@ -138,7 +138,7 @@
             // tsDurum
             // 
             this.tsDurum.EditValue = true;
-            this.tsDurum.Location = new System.Drawing.Point(108, 86);
+            this.tsDurum.Location = new System.Drawing.Point(107, 86);
             this.tsDurum.Name = "tsDurum";
             this.tsDurum.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tsDurum.Properties.Appearance.Options.UseFont = true;
@@ -149,7 +149,7 @@
             // 
             // txtAciklama
             // 
-            this.txtAciklama.Location = new System.Drawing.Point(108, 56);
+            this.txtAciklama.Location = new System.Drawing.Point(107, 56);
             this.txtAciklama.Name = "txtAciklama";
             this.txtAciklama.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtAciklama.Properties.Appearance.Options.UseFont = true;
@@ -158,13 +158,13 @@
             // 
             // txtAd
             // 
-            this.txtAd.Location = new System.Drawing.Point(108, 26);
+            this.txtAd.Location = new System.Drawing.Point(107, 26);
             this.txtAd.Name = "txtAd";
             this.txtAd.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtAd.Properties.Appearance.Options.UseFont = true;
             this.txtAd.Size = new System.Drawing.Size(216, 24);
             this.txtAd.TabIndex = 1;
-            this.txtAd.EditValueChanged += new System.EventHandler(this.txtAd_EditValueChanged);            
+            this.txtAd.EditValueChanged += new System.EventHandler(this.txtAd_EditValueChanged);
             // 
             // labelControl3
             // 
@@ -180,7 +180,7 @@
             // 
             this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.Location = new System.Drawing.Point(31, 59);
+            this.labelControl2.Location = new System.Drawing.Point(31, 58);
             this.labelControl2.Name = "labelControl2";
             this.labelControl2.Size = new System.Drawing.Size(71, 18);
             this.labelControl2.TabIndex = 0;
@@ -202,7 +202,7 @@
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl2.Location = new System.Drawing.Point(335, 0);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(690, 539);
+            this.panelControl2.Size = new System.Drawing.Size(596, 411);
             this.panelControl2.TabIndex = 1;
             // 
             // gridControl1
@@ -211,7 +211,7 @@
             this.gridControl1.Location = new System.Drawing.Point(2, 2);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(686, 535);
+            this.gridControl1.Size = new System.Drawing.Size(592, 407);
             this.gridControl1.TabIndex = 0;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -237,14 +237,14 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 539);
+            this.ClientSize = new System.Drawing.Size(931, 411);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.panelControl1);
             this.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "FrmKategori";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "KATEGORİ İŞLEMLERİ";
+            this.Text = "Kategori Tanımları";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmKategori_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();

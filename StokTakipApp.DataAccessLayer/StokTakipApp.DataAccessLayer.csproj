@@ -75,6 +75,14 @@
     <Compile Include="Migrations\202504041614316_InitalShelfAdd.Designer.cs">
       <DependentUpon>202504041614316_InitalShelfAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202504050858418_InitalModelUpdate.cs" />
+    <Compile Include="Migrations\202504050858418_InitalModelUpdate.Designer.cs">
+      <DependentUpon>202504050858418_InitalModelUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202504061338198_UpdateLogİnital.cs" />
+    <Compile Include="Migrations\202504061338198_UpdateLogİnital.Designer.cs">
+      <DependentUpon>202504061338198_UpdateLogİnital.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
@@ -99,6 +107,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202504041614316_InitalShelfAdd.resx">
       <DependentUpon>202504041614316_InitalShelfAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504050858418_InitalModelUpdate.resx">
+      <DependentUpon>202504050858418_InitalModelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202504061338198_UpdateLogİnital.resx">
+      <DependentUpon>202504061338198_UpdateLogİnital.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
